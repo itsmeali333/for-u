@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Zimal 💖</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+    }
+
+    .terminal {
+      padding: 2rem;
+      white-space: pre-line;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .typing-line::after {
+      content: '|';
+      animation: blink 0.7s infinite;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/25/audio_d258d05b2a.mp3?filename=in-love-143124.mp3" type="audio/mpeg">
+  </audio>
+  <canvas id="confetti-canvas" class="confetti"></canvas>
+  <div class="terminal" id="terminal"></div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const lines = [
+      '> Running love.exe...',
+      '> Connecting to: Zimal 💘',
+      '> Source: Instagram story reply 📲',
+      '> Connection status: Unbreakable ✅',
+      '> Uptime: Since April 27, 2023 (2 years together)',
+      '> Estimated meet time: ~5 years to go ⏳',
+      '',
+      '📁 nicknames.js',
+      '  const nicknames = ["Meow", "Honey", "Snowwhite", "Cupcake", "Queen", "Chuuchi", "Goldfish", "Soulmate", "Jaan", "My Person 💞"]',
+      '  nicknames.forEach(name => console.log(`Zimal is my ${name}`));',
+      '',
+      '📁 how_we_met.json',
+      '  { "platform": "Instagram", "moment": "Story reply", "date": "2023-04-27", "message": "And that\'s when everything started 💫" }',
+      '',
+      '📁 love_story.cpp',
+      '  while (true) { stay_strong(); support_each_other(); never_give_up_on("Zimal"); }',
+      '',
+      '📁 fights_fix_and_us.py',
+      '  def fight(): return "temporary glitch"',
+      '  def fix(): return "permanent upgrade"',
+      '  def relationship(): return fight() + fix() + " = stronger us 💪❤️"',
+      '',
+      '📁 countdown_to_meeting.txt',
+      '  2 years done ✅',
+      '  5 years to go... ⏳',
+      '  No matter how far, You\'re already mine 🫂',
+      '',
+      '📁 birthday_wish.html',
+      '',
+      '  Happy Birthday, Zimal 🎂💖',
+      '  From a story reply to my whole story.',
+      '  From just a name on screen to the name in my prayers.',
+      '  We’ve fought, healed, stayed — all online.',
+      '  But I swear, the first hug in 5 years... will be worth the wait.',
+      '',
+      '  Forever yours — Ali 💌'
+    ];
+
+    let lineIndex = 0;
+
+    function typeLine() {
+      if (lineIndex < lines.length) {
+        const line = document.createElement('div');
+        line.classList.add('typing-line');
+        terminal.appendChild(line);
+
+        let charIndex = 0;
+        const typing = setInterval(() => {
+          if (charIndex < lines[lineIndex].length) {
+            line.textContent += lines[lineIndex].charAt(charIndex);
+            charIndex++;
+          } else {
+            clearInterval(typing);
+            line.classList.remove('typing-line');
+            lineIndex++;
+            setTimeout(typeLine, 300);
+          }
+        }, 30);
+      }
+    }
+
+    typeLine();
+
+    // Confetti Effect
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confetti = Array.from({length: 150}).map(() => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 6 + 2,
+      d: Math.random() * 50 + 10,
+      color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+      tilt: Math.random() * 10 - 10,
+      tiltAngle: 0
+    }));
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confetti.forEach(p => {
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.ellipse(p.x, p.y, p.r, p.r/2, p.tilt, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      update();
+    }
+
+    function update() {
+      confetti.forEach(p => {
+        p.y += Math.cos(p.d) + 1 + p.r / 2;
+        p.x += Math.sin(0);
+        if (p.y > canvas.height) {
+          p.y = -10;
+          p.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    setInterval(draw, 33);
+  </script>
+</body>
+</html>
